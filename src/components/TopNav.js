@@ -13,7 +13,7 @@ const TopNav = kind({
 		<Panel {...props}>
 			<Link to="/"><IconButton >home</IconButton></Link>
 			<Link to="/setting"><IconButton >gear</IconButton></Link>
-			<Link to="/connecting"><IconButton >plus</IconButton></Link>
+			<Link to="/inputname"><IconButton >plus</IconButton></Link>
 			
 			{/*use repeater*/}
 
