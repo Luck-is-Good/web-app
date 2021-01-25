@@ -6,8 +6,8 @@ import Panel from '@enact/moonstone/Panels';
 import React from 'react';
 import {Row, Cell, Column} from '@enact/ui/Layout';
 import {ResolutionDecorator} from '@enact/ui/resolution';
-import Connecting from '../components/Connecting';
 import TopNav from '../components/TopNav';
+import InputName from '../components/InputName';
 
 const Home = kind({
 	name: 'home',
@@ -22,7 +22,7 @@ const Home = kind({
 				<Cell>
 					<Row style={{height: '100%'}}> 
 						<Cell >
-							<Connecting/>
+							<InputName/>
 						</Cell>
 						{/*home : no right side */}
 					</Row>
