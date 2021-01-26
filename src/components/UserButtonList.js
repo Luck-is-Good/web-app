@@ -6,19 +6,20 @@ import { connect } from 'react-redux';
 import UserButton from './UserButton';
 import reducer from '../reducers/reducer';
 import store from '../store/store';
-
+import { Panel } from '@enact/moonstone/Panels';
 
 class UserButtonList extends Component {
   render() {
     var users = store.getState().data.users
     console.log(users)
     return (
-      <div>
-    		
-        <UserButton
-        id={users[0].id}
-        name={users[0].name} />
-      </div>
+      <Panel>
+        {users.map(users =>
+          <UserButton
+          id={users.id}
+          name={users.name}/>
+        )}
+      </Panel>
     );
   }
 }
@@ -41,5 +42,7 @@ const UserButtonListDispatchToProps = (dispatch) => {
     }
 }
 */
+
+
 
 export default connect(UserButtonListStateToProps,null)(UserButtonList);

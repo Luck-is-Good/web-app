@@ -1,6 +1,7 @@
 /* eslint-disable */
 //https://github.com/naver/react-sample-code/blob/master/src/component/todolist/TODOList.js
 import React, { Component } from 'react';
+import Button from '@enact/moonstone/Button';
 
 
 class UserButton extends Component {
@@ -17,11 +18,11 @@ class UserButton extends Component {
             >{todo}</li>
             */
 
-            <button id={id}
+            <Button id={id}
             //onClick={() => onClick({
                 /*route -> SideNav*/
             //})}
-            >{name}</button>
+            >{name}</Button>
         );
     }
 }

@@ -16,9 +16,8 @@ const TopNav = kind({
 			<Link to="/setting"><IconButton >gear</IconButton></Link>
 			<Link to="/inputname"><IconButton >plus</IconButton></Link>
 			
-			{/*use map*/}
 			<UserButtonList/>
-			<Link to="/user1"><Button >USER1</Button></Link>
+			{/*button-SideNav */}
 
 			
 			

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import MoonstoneDecorator from '@enact/moonstone/MoonstoneDecorator';
 import kind from '@enact/core/kind';
 import Panel from '@enact/moonstone/Panels';
