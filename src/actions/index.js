@@ -17,3 +17,9 @@ export const _update_user_list =() =>{
         type: types._UPDATE_USER_LIST
     }
 }
+
+export const _selected =() =>{
+    return{
+        type: types._SELECTED
+    }
+}

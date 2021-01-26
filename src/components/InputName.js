@@ -11,6 +11,8 @@ import {Link} from 'react-router-dom';
 import Notification from '@enact/moonstone/Notification';
 import Dialog from '@enact/moonstone/Dialog';
 
+import MoonstoneDecorator from '@enact/moonstone/MoonstoneDecorator';
+import {ResolutionDecorator} from '@enact/ui/resolution';
 
 class InputName extends React.Component{
 
@@ -42,7 +44,7 @@ class InputName extends React.Component{
             </form>
 
 			<Link to={{
-				pathname : '/Connect',
+				pathname : '/ConnectPage',
 				state : {
 					inputvalue : this.state.value
 				}
@@ -54,4 +56,6 @@ class InputName extends React.Component{
 	}
 }
 
-export default InputName;
+export default (InputName);
+
+

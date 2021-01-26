@@ -12,6 +12,8 @@ import Notification from '@enact/moonstone/Notification';
 import Dialog from '@enact/moonstone/Dialog';
 import { firestore } from "../db/firebase";
 
+
+
 var userId = Math.random().toString(36).slice(7);
 
 //랜덤으로 생성한 user_id를 firestore에 저장
@@ -20,7 +22,8 @@ var userId = Math.random().toString(36).slice(7);
 //실패시 다시 시도하라고 메시지 띄우기
 class Connect extends React.Component{
 	render() {
-		const inputValue = this.props.location.state.inputvalue
+		const {inputValue} = this.props;
+		//const inputValue = this.props.location.state.inputvalue;
 
       	//firestore에 user_id저장
       	firestore.collection("USERS").doc(inputValue).set({
@@ -52,5 +55,5 @@ class Connect extends React.Component{
 	}
 }
 
-export default Connect;
+export default (Connect);
 

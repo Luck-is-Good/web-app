@@ -1,34 +1,35 @@
+/* eslint-disable */
 import Button from '@enact/moonstone/Button';
 import { Panel } from '@enact/moonstone/Panels';
 import React from 'react';
 import BodyText from '@enact/moonstone/BodyText';
 import Heading from '@enact/moonstone/Heading';
+import store from '../store/store';
+import { connect } from 'react-redux';
 
-class Userinfo extends React.Component {
-      name = 'Userinfo'
-
+class SideNav extends React.Component {
       render() {
+            const {name, id, selected, onClick} = this.props;
             return (
                   <Panel >
-                        <Heading>USER INFO</Heading>
+                        <Heading>USER INFO 
+                        </Heading>
 
-                        <BodyText>Name : </BodyText>
-                        <BodyText>Age :</BodyText>
+                        <BodyText>Name : {name}</BodyText>
+
+                        
                         <BodyText>Real-time Location :</BodyText>
-
-                        <Button>See before Location</Button>
-                        <p />
-                        <Button>Search Shortest Path</Button>
-                        <p />
-                        <Button>Alert</Button>
-                        <p />
-                        <Button>Call</Button>
-                        <p />
-                        <Button>112</Button>
+                        <Button>DELETE</Button>
                   </Panel>
             )
       }
 };
+
+const SideNavStateToProps = (state) => {
+      return {
+        users: state.data.users
+      }
+}
 
 // function loadInfo() {
 //       let userName;
@@ -46,4 +47,4 @@ class Userinfo extends React.Component {
 //       return userName;
 // }
 
-export default Userinfo;
+export default connect(SideNavStateToProps,null)(SideNav);

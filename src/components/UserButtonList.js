@@ -4,21 +4,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 //import { complete, complete2 } from '../../action/todo';
 import UserButton from './UserButton';
-import reducer from '../reducers/reducer';
 import store from '../store/store';
 import { Panel } from '@enact/moonstone/Panels';
+import {_selected} from '../actions/index';
 
+var users = store.getState().data.users
 class UserButtonList extends Component {
   render() {
-    var users = store.getState().data.users
+    
     console.log(users)
+    const {onClick} = this.props;
     return (
       <Panel>
-        {users.map(users =>
-          <UserButton
-          id={users.id}
-          name={users.name}/>
-        )}
+        {users.map(users => 
+        <UserButton id={users.id} name={users.name} selcted={users.selcted} onClick={onClick}/>)}
       </Panel>
     );
   }
@@ -32,17 +31,18 @@ const UserButtonListStateToProps = (state) => {
 }
 
 
-/*
+
 const UserButtonListDispatchToProps = (dispatch) => {
     return {
         onClick(data){
           // dispatch(complete2(data))
-          //dispatch(complete(data))
+          dispatch(_selected(data))
+          console.log(users)
         }
     }
 }
-*/
 
 
 
-export default connect(UserButtonListStateToProps,null)(UserButtonList);
+
+export default connect(UserButtonListStateToProps,UserButtonListDispatchToProps)(UserButtonList);

@@ -23,9 +23,13 @@ const Home = kind({
 							<Cell >
 								<Map />
 							</Cell>
+							
+							
 							<Cell size="30%">
-								<SideNav />
+								<SideNav/>
 							</Cell>
+							
+							
 						</Row>
 					</Cell>
 				</Column>
