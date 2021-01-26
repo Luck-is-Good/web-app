@@ -6,8 +6,14 @@ export const _cretae_user =() =>{
     }
 }
 
-export const _update_loc = () =>{
+export const _update_loc =() =>{
     return {
         type: types._UPDATE_LOC
+    }
+}
+
+export const _update_user_list =() =>{
+    return{
+        type: types._UPDATE_USER_LIST
     }
 }

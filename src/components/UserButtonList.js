@@ -5,19 +5,19 @@ import { connect } from 'react-redux';
 //import { complete, complete2 } from '../../action/todo';
 import UserButton from './UserButton';
 import reducer from '../reducers/reducer';
+import store from '../store/store';
 
 
 class UserButtonList extends Component {
-  
   render() {
-  	const {users} = this.props;
+    var users = store.getState().data.users
+    console.log(users)
     return (
       <div>
-    		{users.map(UserButton =>
-    			<UserButton
-                key={UserButton.id}
-                {...UserButton} />
-    		)}
+    		
+        <UserButton
+        id={users[0].id}
+        name={users[0].name} />
       </div>
     );
   }
@@ -26,7 +26,7 @@ class UserButtonList extends Component {
 
 const UserButtonListStateToProps = (state) => {
   return {
-    users: state.users
+    users: state.data.users
   }
 }
 

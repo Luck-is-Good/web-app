@@ -13,6 +13,7 @@ import connect from '../components/Connect';
 import inputname from '../components/InputName';
 
 export default function App() {
+	//init state from db8
 	return(
 		<HashRouter>
 			<Switch>
