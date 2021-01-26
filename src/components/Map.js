@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import {firestore} from '../db/firebase';
-
+import store from '../store/store';
 const containerStyle = {
 	width: '100%',
 	height: '800px'
@@ -36,9 +36,14 @@ class Map extends Component {
 		super(props);
 		this.state = {
 			count: 0,
-			Indiacenter: { lat: 12.935504285297199, lng: 77.60565231958368 },
-			User1center: { lat: 12.935, lng: 77.604 }
+			id: store.getState().data.center,
+			Homecenter: { lat: 12.935504285297199, lng: 77.60565231958368 },
+			User1center: { lat: 12.935, lng: 77.604 },
+			center: { lat: 12.935504285297199, lng: 77.60565231958368 },
 		}
+		store.subscribe(function(){
+			this.setState({id:store.getState().data.centerid});
+		}.bind(this));
 	}
 
 	/* 컴포넌트 생성 시 실행되는 부분
@@ -64,6 +69,20 @@ class Map extends Component {
 			});	
 	}
 
+	componentDidUpdate(){
+		var users = store.getState().data.users;
+		const user = users.find(whereid);
+		lat = user.latitude;
+		lng = user.longitude;
+		this.setState({center:{lat, lng}});
+	}
+
+	whereid(element) {
+		if(element.id === this.state.id) {
+			return true;
+		}
+	}
+
 	// 컴포넌트 언마운트 될 때 타이머 소멸
 	componentWillUnmount() {
 		clearInterval(this.timerID);
@@ -73,18 +92,17 @@ class Map extends Component {
 	updateLocation(i) {
 		if(i < locations.length){
 			this.setState({
-				Indiacenter: locations[i],
+				Homecenter: locations[i],
 				count: i + 1
 			})
 		}
 		else {
 			this.setState({
-				Indiacenter: locations[0],
+				Homecenter: locations[0],
 				count: 0
 			})
 		}
 		console.log("current location: ", locations[i].lat, locations[i].lng);
-		
 	}
 
 	render() {
@@ -94,12 +112,12 @@ class Map extends Component {
 			>
 				<GoogleMap
 					mapContainerStyle={containerStyle}
-					center={this.state.Indiacenter}
+					center={this.state.center}
 					zoom={18}
 				>
 					{ /* Child components, such as markers, info windows, etc. */}
 					<Marker
-						position={this.state.Indiacenter}
+						position={this.state.Homecenter}
 						icon={icons.home}
 					/>
 					<Marker

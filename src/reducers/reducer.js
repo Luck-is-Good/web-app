@@ -32,6 +32,8 @@ function reducer (state = root_reducer, action){
             return {
 
             }
+        case types._USER_SELECT:
+            return {...setting, centerid: action.id }
         default: return state; //action을 이용하지 않을때 기본 this.props.setting을 사용할 때 사용
     }
 } 

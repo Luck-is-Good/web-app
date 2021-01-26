@@ -7,5 +7,6 @@ export default {
     setting:{
         bgColor: "black",
         fontSize: "regular"
-    }
+    },
+    centerid : '0'
 }
