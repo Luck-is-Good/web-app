@@ -1,3 +1,4 @@
+/* eslint-disable */
 import Reducer_setting from './reducer_setting';//state 초기값을 가져온다.
 import * as types from '../actions/actionTypes'; //액션 코드로 가져온다.
  

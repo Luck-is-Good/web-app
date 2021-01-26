@@ -5,6 +5,7 @@ import {Panel} from '@enact/moonstone/Panels';
 import React from 'react';
 import IconButton from '@enact/moonstone/IconButton';
 import { Link } from "react-router-dom";
+import UserButtonList from './UserButtonList';
 
 const TopNav = kind({
 	name: 'TopNav',
@@ -15,9 +16,11 @@ const TopNav = kind({
 			<Link to="/setting"><IconButton >gear</IconButton></Link>
 			<Link to="/inputname"><IconButton >plus</IconButton></Link>
 			
-			{/*use repeater*/}
-
+			{/*use map*/}
+			<UserButtonList/>
 			<Link to="/user1"><Button >USER1</Button></Link>
+
+			
 			
 		</Panel>
 	)
