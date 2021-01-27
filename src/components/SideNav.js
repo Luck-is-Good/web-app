@@ -1,3 +1,4 @@
+/* eslint-disable */
 import Button from '@enact/moonstone/Button';
 import { Panel } from '@enact/moonstone/Panels';
 import React from 'react';
