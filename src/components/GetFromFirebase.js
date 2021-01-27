@@ -3,7 +3,10 @@ import React from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import Icon from '@enact/moonstone/Icon';
 import { firestore } from "../db/firebase";
-import { BodyText } from '@enact/ui/BodyText';
+import { Link } from "react-router-dom";
+import IconButton from '@enact/moonstone/IconButton';
+import BodyText from '@enact/moonstone/BodyText';
+
 
 
 
@@ -53,6 +56,7 @@ class GetFromFirebase extends React.Component {
           <br/>
           input value :{this.props.location.state.inputvalue}
         </BodyText>
+        <Link to="/"><IconButton >home</IconButton></Link>
         </div>  
         
        );
