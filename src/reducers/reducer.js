@@ -2,14 +2,9 @@
 import Reducer_setting from './reducer_setting';//state 초기값을 가져온다.
 import * as types from '../actions/actionTypes'; //액션 코드로 가져온다.
  
-const root_reducer = {
-    data: Reducer_setting
-} 
-
-function reducer (state = root_reducer, action){ 
+function reducer (state = Reducer_setting, action){ 
     //state는 reducer가 갖고 있는 state고 만약 없을시 초기값을 가져온다.
     //action은 dispatch함수로 connect를 통해서 들어 오게 된다.
-    const {setting} = state;
 
     switch (action.type){//리듀서를 통해서 들어온 action 
         case types._CREATE_USER: //acionTyeps에서 구분
@@ -32,6 +27,11 @@ function reducer (state = root_reducer, action){
             return {
 
             }
+        case types._USER_SELECT:
+            console.log(action.centerid);
+            return {...state, centerid: action.centerid }
+        case types._LOAD_USERLIST:
+            return {...state, users: action.users}
         default: return state; //action을 이용하지 않을때 기본 this.props.setting을 사용할 때 사용
     }
 } 

@@ -2,7 +2,7 @@
 //https://github.com/naver/react-sample-code/blob/master/src/component/todolist/TODOList.js
 import React, { Component } from 'react';
 import Button from '@enact/moonstone/Button';
-
+import store from '../store/store';
 
 class UserButton extends Component {
     render() {
@@ -18,11 +18,9 @@ class UserButton extends Component {
             >{todo}</li>
             */
 
-            <Button id={id}
-            //onClick={() => onClick({
-                /*route -> SideNav*/
-            //})}
-            >{name}</Button>
+            <Button id={id} onClick={
+                function(){ store.dispatch({type:'USER_SELECT', centerid: id});
+              }}>{name}</Button>
         );
     }
 }

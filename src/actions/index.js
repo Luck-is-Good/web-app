@@ -17,3 +17,15 @@ export const _update_user_list =() =>{
         type: types._UPDATE_USER_LIST
     }
 }
+
+export const _user_select =() => {
+    return{
+        type: types._USER_SELECT
+    }
+}
+
+export const _load_userlist =() => {
+    return{
+        type: types._LOAD_USERLIST
+    }
+}
