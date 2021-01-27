@@ -18,10 +18,9 @@ class UserButton extends Component {
             >{todo}</li>
             */
 
-            <Button id={id}
-                onClick={
+            <Button id={id} onClick={
                 function(){ store.dispatch({type:'USER_SELECT', centerid: id});
-              }} >{name}</Button>
+              }}>{name}</Button>
         );
     }
 }

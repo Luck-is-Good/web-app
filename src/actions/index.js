@@ -23,3 +23,9 @@ export const _user_select =() => {
         type: types._USER_SELECT
     }
 }
+
+export const _load_userlist =() => {
+    return{
+        type: types._LOAD_USERLIST
+    }
+}
