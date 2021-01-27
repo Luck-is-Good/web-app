@@ -24,3 +24,15 @@ export const _init_store =(user_data) => {
         data: user_data
     }
 }
+
+export const _user_select =() => {
+    return{
+        type: types._USER_SELECT
+    }
+}
+
+export const _load_userlist =() => {
+    return{
+        type: types._LOAD_USERLIST
+    }
+}

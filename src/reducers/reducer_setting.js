@@ -8,5 +8,6 @@ export default {
         init: false,
         bgColor: "black",
         fontSize: "regular"
-    }
+    },
+    centerid : '0'
 }
