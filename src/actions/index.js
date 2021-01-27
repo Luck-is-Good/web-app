@@ -17,3 +17,10 @@ export const _update_user_list =() =>{
         type: types._UPDATE_USER_LIST
     }
 }
+
+export const _init_store =(user_data) => {
+    return{
+        type: types._INIT_STORE,
+        data: user_data
+    }
+}
