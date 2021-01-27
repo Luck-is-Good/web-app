@@ -10,14 +10,16 @@ import { Panel } from '@enact/moonstone/Panels';
 
 class UserButtonList extends Component {
   render() {
-    var users = store.getState().data.users
+    var users = store.getState().users
     console.log(users)
     return (
       <Panel>
         {users.map(users =>
           <UserButton
           id={users.id}
-          name={users.name}/>
+          name={users.name}
+          lat={users.latitude}
+          lng={users.longitude}/>
         )}
       </Panel>
     );
@@ -27,7 +29,7 @@ class UserButtonList extends Component {
 
 const UserButtonListStateToProps = (state) => {
   return {
-    users: state.data.users
+    users: state.users
   }
 }
 

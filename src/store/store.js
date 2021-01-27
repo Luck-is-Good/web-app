@@ -1,6 +1,7 @@
 /* eslint-disable */
 import { createStore } from "redux"
 import reducers from '../reducers/reducer'
-var store = createStore(reducers);
+import { composeWithDevTools } from 'redux-devtools-extension';
+const store = createStore(reducers, composeWithDevTools());
 export default store;
 

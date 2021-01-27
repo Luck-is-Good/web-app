@@ -8,5 +8,6 @@ export default {
         bgColor: "black",
         fontSize: "regular"
     },
-    centerid : '0'
+    lat: 35.8245, 
+    lng: 128.5009
 }

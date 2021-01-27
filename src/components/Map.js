@@ -8,16 +8,6 @@ const containerStyle = {
 	height: '800px'
 }
 
-const location1 = {
-	lat: 12.935504285297199,
-	lng: 77.60565231958368
-}
-
-const location2 = {
-	lat: 12.935,
-	lng: 77.604
-}
-
 const icons = {
 	home: {
 		url: 'https://image.flaticon.com/icons/png/128/25/25694.png',
@@ -36,13 +26,14 @@ class Map extends Component {
 		super(props);
 		this.state = {
 			count: 0,
-			id: store.getState().data.center,
-			Homecenter: { lat: 12.935504285297199, lng: 77.60565231958368 },
+			Homecenter: { lat: 35.887653204936996, lng: 128.612698669104},
 			User1center: { lat: 12.935, lng: 77.604 },
-			center: { lat: 12.935504285297199, lng: 77.60565231958368 },
+			lat: store.getState().lat,
+			lng: store.getState().lng,
 		}
 		store.subscribe(function(){
-			this.setState({id:store.getState().data.centerid});
+			this.setState({lat:store.getState().lat});
+			this.setState({lng:store.getState().lng});
 		}.bind(this));
 	}
 
@@ -69,20 +60,6 @@ class Map extends Component {
 			});	
 	}
 
-	componentDidUpdate(){
-		var users = store.getState().data.users;
-		const user = users.find(whereid);
-		lat = user.latitude;
-		lng = user.longitude;
-		this.setState({center:{lat, lng}});
-	}
-
-	whereid(element) {
-		if(element.id === this.state.id) {
-			return true;
-		}
-	}
-
 	// 컴포넌트 언마운트 될 때 타이머 소멸
 	componentWillUnmount() {
 		clearInterval(this.timerID);
@@ -92,13 +69,13 @@ class Map extends Component {
 	updateLocation(i) {
 		if(i < locations.length){
 			this.setState({
-				Homecenter: locations[i],
+				User1center: locations[i],
 				count: i + 1
 			})
 		}
 		else {
 			this.setState({
-				Homecenter: locations[0],
+				User1center: locations[0],
 				count: 0
 			})
 		}
@@ -112,7 +89,7 @@ class Map extends Component {
 			>
 				<GoogleMap
 					mapContainerStyle={containerStyle}
-					center={this.state.center}
+					center={{lat: this.state.lat, lng: this.state.lng}}
 					zoom={18}
 				>
 					{ /* Child components, such as markers, info windows, etc. */}
