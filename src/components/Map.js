@@ -25,15 +25,15 @@ class Map extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			count: 0,
-			//id: store.getState().center,
-			Homecenter: { lat: 12.935504285297199, lng: 77.60565231958368 },
-			User1center: { lat: 12.935, lng: 77.604 },
-			center: { lat: 12.935504285297199, lng: 77.60565231958368 },
+			selected: 0,
+			Homecenter: { lat: 35.887653204936996, lng: 128.612698669104},
+			Users: []
 		}
-		// store.subscribe(function(){
-		// 	this.setState({id:store.getState().data.centerid});
-		// }.bind(this));
+
+		store.subscribe(function(){
+			this.setState({Users:store.getState().users});
+			this.setState({selected:store.getState().centerid})
+		}.bind(this));
 	}
 
 	/* 컴포넌트 생성 후 실행되는 부분
@@ -44,21 +44,17 @@ class Map extends Component {
 		let user_data = []
 		let user_locs = []
 
-		this.timerID = setInterval(
-			() => this.updateLocation(this.state.count),
-			5000
-		);
+		this.timerID = setInterval(this.updateLocation(),5000);
 
-
-		// firestore
-		// 	.collection("USERS" + "/test1" + "/locations")
-		// 	.orderBy("createdAt", "asc")
-		// 	.get()
-		// 	.then((docs) => {
-		// 		docs.forEach((doc) => {
-		// 			locations.push({ lat: doc.data().latitude, lng: doc.data().longitude });
-		// 		});
-		// 	});
+		firestore
+			.collection("USERS" + "/test1" + "/locations")
+			.orderBy("createdAt", "asc")
+			.get()
+			.then((docs) => {
+				docs.forEach((doc) => {
+					locations.push({ lat: doc.data().latitude, lng: doc.data().longitude });
+				});
+			});
 
 		firestore.collection("USERS").where("device_id", "!=", false).get().then((snapshot)=>{
 			snapshot.forEach((doc)=>{
@@ -94,8 +90,6 @@ class Map extends Component {
 		})
 	}
 
-	
-
 	// componentDidUpdate(){
 	// 	var users = store.getState().data.users;
 	// 	const user = users.find(whereid);
@@ -103,12 +97,6 @@ class Map extends Component {
 	// 	lng = user.longitude;
 	// 	this.setState({center:{lat, lng}});
 	// }
-
-	whereid(element) {
-		if (element.id === this.state.id) {
-			return true;
-		}
-	}
 
 	// 컴포넌트 언마운트 될 때 타이머 소멸
 	componentWillUnmount() {
@@ -155,7 +143,7 @@ class Map extends Component {
 		})
 		
 		this.setState({
-			Homecenter: {lng:store.getState().users[2].longitude, lat:store.getState().users[2].latitude}
+			Homecenter: {lng:store.getState().users[this.state.selected].longitude, lat:store.getState().users[this.state.selected].latitude}
 		})
 	
 		//console.log("current location: ", locations[i].lat, locations[i].lng);
@@ -169,17 +157,19 @@ class Map extends Component {
 				<GoogleMap
 					mapContainerStyle={containerStyle}
 					center={this.state.Homecenter}
-					zoom={15}
+					zoom={18}
 				>
-					{ /* Child components, such as markers, info windows, etc. */}
+					{this.state.Users.map(user =>
+						<Marker
+						position={{ lat: user.latitude, lng: user.longitude}}
+						icon={icons.user}/>
+					)}
+
 					<Marker
 						position={this.state.Homecenter}
 						icon={icons.home}
 					/>
-					<Marker
-						position={this.state.Homecenter}
-						icon={icons.user}
-					/>
+					
 				</GoogleMap>
 			</LoadScript>
 		);

@@ -20,13 +20,14 @@ class UserButtonList extends Component {
   }
 
   render() {
-    console.log(store.getState());
+
     return (
       <div>
         {this.state.users.map(user =>
           <UserButton
-          id={user.id}
+          id={user.indexof}
           name={user.name}/>
+
         )}
       </div>
     );
