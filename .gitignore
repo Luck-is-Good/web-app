@@ -11,7 +11,7 @@ build
 dist
 appinfo.json
 index.html
-firebase.js
+src/db/firebase.js
 
 # misc
 .DS_Store
