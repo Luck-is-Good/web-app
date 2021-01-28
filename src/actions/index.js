@@ -23,3 +23,9 @@ export const _user_select =() => {
         type: types._USER_SELECT
     }
 }
+
+export const _user_delete =() => {
+    return{
+        type: types._USER_DELETE
+    }
+}

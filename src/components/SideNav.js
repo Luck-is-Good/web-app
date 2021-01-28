@@ -1,30 +1,35 @@
+/* eslint-disable */
 import Button from '@enact/moonstone/Button';
 import { Panel } from '@enact/moonstone/Panels';
 import React from 'react';
 import BodyText from '@enact/moonstone/BodyText';
 import Heading from '@enact/moonstone/Heading';
+import Delete from './Delete';
+import store from '../store/store';
 
-class Userinfo extends React.Component {
-      name = 'Userinfo'
-
+class SideNav extends React.Component {
+      
+      constructor(props) {
+            super(props);
+            this.state = {
+			name: store.getState().name,
+			id: store.getState().id,
+		}
+		store.subscribe(function(){
+			this.setState({name:store.getState().name});
+			this.setState({id:store.getState().id});
+		}.bind(this));
+	}
+      
       render() {
             return (
                   <Panel >
                         <Heading>USER INFO</Heading>
 
-                        <BodyText>Name : </BodyText>
-                        <BodyText>Age :</BodyText>
+                        <BodyText>Name : {this.state.name}</BodyText>
                         <BodyText>Real-time Location :</BodyText>
-
-                        <Button>See before Location</Button>
-                        <p />
-                        <Button>Search Shortest Path</Button>
-                        <p />
-                        <Button>Alert</Button>
-                        <p />
-                        <Button>Call</Button>
-                        <p />
-                        <Button>112</Button>
+                        <Delete/>
+                       
                   </Panel>
             )
       }
@@ -46,4 +51,4 @@ class Userinfo extends React.Component {
 //       return userName;
 // }
 
-export default Userinfo;
+export default SideNav;

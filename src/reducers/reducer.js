@@ -29,7 +29,10 @@ function reducer (state = Reducer_setting, action){
 
             }
         case types._USER_SELECT:
-            return {...state, lat: action.lat, lng: action.lng}
+            return {...state, lat: action.lat, lng: action.lng, name:action.name, id:action.id}
+        case types._USER_DELETE:
+                return {}
+        
         default: return state; //action을 이용하지 않을때 기본 this.props.setting을 사용할 때 사용
     }
 } 

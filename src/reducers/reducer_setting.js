@@ -1,3 +1,4 @@
+/* eslint-disable */
 export default {
     users:[
         {name:'John', id:'1', longitude:128.5253009, latitude: 35.8219145, createdAt:"2021년 01월 20일 13시 36분 04초"},
