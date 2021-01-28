@@ -35,4 +35,10 @@ export const _load_userlist =() => {
     return{
         type: types._LOAD_USERLIST
     }
+}    
+
+export const _user_delete =() => {
+    return{
+        type: types._USER_DELETE
+    }
 }

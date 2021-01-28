@@ -4,3 +4,4 @@ export const _UPDATE_USER_LIST = 'UPDATE_USER_LIST';
 export const _INIT_STORE = 'INIT_STORE';
 export const _USER_SELECT = 'USER_SELECT';
 export const _LOAD_USERLIST = 'LOAD_USERLIST';
+export const _USER_DELETE = 'USER_DELETE';
