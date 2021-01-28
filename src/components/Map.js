@@ -40,21 +40,61 @@ class Map extends Component {
 	   1. 타이머 설정: 5초마다 updateLocation() 실행
 	   2. firebase에서 위치 정보 가지고 옴 */
 	componentDidMount() {
+		let fb_users = []
+		let user_data = []
+		let user_locs = []
+
 		this.timerID = setInterval(
 			() => this.updateLocation(this.state.count),
 			5000
 		);
 
-		firestore
-			.collection("USERS" + "/test1" + "/locations")
-			.orderBy("createdAt", "asc")
-			.get()
-			.then((docs) => {
-				docs.forEach((doc) => {
-					locations.push({ lat: doc.data().latitude, lng: doc.data().longitude });
-				});
-			});
+
+		// firestore
+		// 	.collection("USERS" + "/test1" + "/locations")
+		// 	.orderBy("createdAt", "asc")
+		// 	.get()
+		// 	.then((docs) => {
+		// 		docs.forEach((doc) => {
+		// 			locations.push({ lat: doc.data().latitude, lng: doc.data().longitude });
+		// 		});
+		// 	});
+
+		firestore.collection("USERS").where("device_id", "!=", false).get().then((snapshot)=>{
+			snapshot.forEach((doc)=>{
+				fb_users.push(doc.id)
+			})
+		}).then(()=>{
+		
+			fb_users.forEach((user)=>{
+				firestore.collection("USERS").doc(user).collection("locations").orderBy("createdAt", "desc").limit(1)
+				.get()
+				.then((data)=>{
+					data.forEach((doc)=>{
+						// console.log(doc.data())
+						user_locs.push(doc.data());
+					})
+				}).then(()=>{
+					if(user_locs.length == fb_users.length){
+						for(let i = 0; i < fb_users.length;i++){
+							let data = {
+								name:fb_users[i],
+								longitude: user_locs[i].longitude,
+								latitude: user_locs[i].latitude,
+								createdAt: user_locs[i].createdAt
+							};
+					
+							user_data.push(data);
+						}
+					}
+					console.log(user_data);
+					store.dispatch({ type:'UPDATE_LOC', users:user_data})
+				})
+			})
+		})
 	}
+
+	
 
 	// componentDidUpdate(){
 	// 	var users = store.getState().data.users;
@@ -77,18 +117,47 @@ class Map extends Component {
 
 	// time interval마다 실행될 함수
 	updateLocation(i) {
-		if (i < locations.length - 1) {
-			this.setState({
-				Homecenter: locations[i],
-				count: i + 1
+		let fb_users = []
+		let user_data = []
+		let user_locs = []
+
+		firestore.collection("USERS").where("device_id", "!=", false).get().then((snapshot)=>{
+			snapshot.forEach((doc)=>{
+				fb_users.push(doc.id)
 			})
-		}
-		else {
-			this.setState({
-				Homecenter: locations[0],
-				count: 0
+		}).then(()=>{
+		
+			fb_users.forEach((user)=>{
+				firestore.collection("USERS").doc(user).collection("locations").orderBy("createdAt", "desc").limit(1)
+				.get()
+				.then((data)=>{
+					data.forEach((doc)=>{
+						// console.log(doc.data())
+						user_locs.push(doc.data());
+					})
+				}).then(()=>{
+					if(user_locs.length == fb_users.length){
+						for(let i = 0; i < fb_users.length;i++){
+							let data = {
+								name:fb_users[i],
+								longitude: user_locs[i].longitude,
+								latitude: user_locs[i].latitude,
+								createdAt: user_locs[i].createdAt
+							};
+					
+							user_data.push(data);
+						}
+					}
+					console.log(user_data);
+					store.dispatch({ type:'UPDATE_LOC', users:user_data})
+				})
 			})
-		}
+		})
+		
+		this.setState({
+			Homecenter: {lng:store.getState().users[2].longitude, lat:store.getState().users[2].latitude}
+		})
+	
 		//console.log("current location: ", locations[i].lat, locations[i].lng);
 	}
 
@@ -100,7 +169,7 @@ class Map extends Component {
 				<GoogleMap
 					mapContainerStyle={containerStyle}
 					center={this.state.Homecenter}
-					zoom={18}
+					zoom={15}
 				>
 					{ /* Child components, such as markers, info windows, etc. */}
 					<Marker
@@ -108,7 +177,7 @@ class Map extends Component {
 						icon={icons.home}
 					/>
 					<Marker
-						position={this.state.User1center}
+						position={this.state.Homecenter}
 						icon={icons.user}
 					/>
 				</GoogleMap>
