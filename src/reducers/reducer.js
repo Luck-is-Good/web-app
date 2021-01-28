@@ -19,8 +19,8 @@ function reducer (state = Reducer_setting, action){
                 users: action.users
             }
         case types._UPDATE_USER_LIST:
-            return {
-
+            return {...state,
+                users: action.users 
             }
         case types._INIT_STORE:
             return {...state,
@@ -28,7 +28,10 @@ function reducer (state = Reducer_setting, action){
             }
         case types._USER_SELECT:
             return {...state,
-                centerid: action.centerid
+                centerid: action.centerid,
+                lat: action.lat,
+                lng: action.lng,
+                selectedname: action.name
             }
         case types._LOAD_USERLIST:
             return {...state,

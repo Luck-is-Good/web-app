@@ -20,13 +20,14 @@ class UserButtonList extends Component {
   }
 
   render() {
-
     return (
       <div>
-        {this.state.users.map(user =>
+        {this.state.users.map((user,index) =>
           <UserButton
-          id={user.indexof}
-          name={user.name}/>
+          id={index}
+          name={user.name}
+          lat={user.latitude}
+          lng={user.longitude}/>
 
         )}
       </div>

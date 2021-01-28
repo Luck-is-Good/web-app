@@ -9,6 +9,6 @@ export default {
         fontSize: "regular"
     },
     centerid:0,
-    lat: 35.8245, 
-    lng: 128.5009
+    lat: 35.887653204936996,
+    lng: 128.612698669104
 }

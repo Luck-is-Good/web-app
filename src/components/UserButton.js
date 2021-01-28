@@ -9,7 +9,7 @@ class UserButton extends Component {
         const {name, id, lat, lng, onClick} = this.props;
         return (
             <Button id={id} onClick={
-                function(){ store.dispatch({type:'USER_SELECT', centerid: id});
+                function(){ store.dispatch({type:'USER_SELECT', centerid: id, lat: lat, lng: lng, selectedname: name});
               }}>{name}</Button>
 
         );
