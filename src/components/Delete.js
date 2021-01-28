@@ -2,24 +2,23 @@
 import React, { Component } from 'react';
 import Button from '@enact/moonstone/Button';
 import store from '../store/store';
+import { firestore } from '../db/firebase';;
 
 class Delete extends Component {
+    delete() {
+        firestore.collection("USERS").doc(user).delete().then(function() {
+            alert("Document successfully deleted!");
+            //store.dispatch
+        }).catch(function(error) {
+            alert("Error removing document: ", error);
+        });
+    }
+    
     render() {
         const {name, id, onClick} = this.props;
         return (
-            /*
-            <li id={id} 
-                onClick={() => onClick({
-                    id : id, 
-                    complete : !complete
-                })}
-                className={!!complete ? 'completed' : ''}
-            >{todo}</li>
-            */
-
-            <Button id={id} onClick={
-                function(){ store.dispatch({type:'USER_DELETE', name:name, id:id});
-              }}>DELETE</Button>
+            <Button name={name} id={id} 
+            onClick={this.delete} >DELETE</Button>
         );
     }
 }

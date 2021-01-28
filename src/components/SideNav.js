@@ -27,9 +27,7 @@ class SideNav extends React.Component {
                         <Heading>USER INFO</Heading>
 
                         <BodyText>Name : {this.state.name}</BodyText>
-                        <BodyText>Real-time Location :</BodyText>
-                        <Delete/>
-                       
+                        <Delete name={this.state.name} id={this.state.name}/>
                   </Panel>
             )
       }
