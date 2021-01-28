@@ -20,11 +20,11 @@ class UserButtonList extends Component {
   }
 
   render() {
-    console.log(store.getState());
     return (
       <div>
         {this.state.users.map(user =>
           <UserButton
+          key={user.id}
           id={user.id}
           name={user.name}/>
         )}

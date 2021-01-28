@@ -1,16 +1,9 @@
 /* eslint-disable */
 import Button from '@enact/moonstone/Button';
-import kind from '@enact/core/kind';
-import {Panel, Header} from '@enact/moonstone/Panels';
-import React from 'react';
-import BodyText from '@enact/moonstone/BodyText';
-
 import Heading from '@enact/moonstone/Heading';
-import Spinner from '@enact/moonstone/Spinner';
-import {Link} from 'react-router-dom';
-import Notification from '@enact/moonstone/Notification';
-import Dialog from '@enact/moonstone/Dialog';
-
+import React from 'react';
+import { Link } from "react-router-dom";
+import css from './InputName.css';
 
 class InputName extends React.Component{
 
@@ -18,35 +11,23 @@ class InputName extends React.Component{
 		super(props);
 		this.state={value: ''};
 		this.handleChange = this.handleChange.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
 	}
     
 	handleChange(event) {
-        this.setState({value: event.target.value});
-	}
-	
-	handleSubmit(event) {
-		alert('A name was submitted: ' + this.state.value);
-		event.preventDefault();
+		this.setState({value: event.target.value});
 	}
 
 	render() {
 		return (
 		<div>
-			<form onSubmit={this.handleSubmit}>
-			<input type="text" placeholder="Name"
-			onChange={this.handleChange}></input> 
-			<input type="submit" value="submit"/>
-			
-			<BodyText >input: {this.state.value}</BodyText>
-            </form>
-
+			<Heading>Input User Name</Heading>
+			<p/>
+			<input className={css.inputForm} type="text" placeholder="Name" onChange={this.handleChange}></input> 
 			<Link to={{
-				pathname : '/Connect',
-				state : {
-					inputvalue : this.state.value
-				}
+				pathname : '/connect',
+				name : this.state.value
 			}}>
+			<p/>
 			<Button>Next</Button>
 			</Link>
 		</div>

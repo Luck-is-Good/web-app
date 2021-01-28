@@ -35,6 +35,10 @@ function reducer (state = Reducer_setting, action){
             return {...state,
                 users: action.users
             }
+        case types._LOAD_LOC:
+            return {...state,
+            current: action.current
+        }
         default: return state; //action을 이용하지 않을때 기본 this.props.setting을 사용할 때 사용
     }
 } 

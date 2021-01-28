@@ -12,11 +12,9 @@ class SideNav extends React.Component {
             return (
                   <Panel >
                         <Heading>USER INFO</Heading>
-
                         <BodyText>Name : </BodyText>
                         <BodyText>Real-time Location :</BodyText>
-                        <Button>DELETE</Button>
-                        
+                        <Button>DELETE</Button>                     
                   </Panel>
             )
       }

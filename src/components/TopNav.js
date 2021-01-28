@@ -30,16 +30,14 @@ class TopNav extends Component {
 
 		firestore.collection("USERS").where("device_id", "!=", false).get().then((snapshot)=>{
 			snapshot.forEach((doc)=>{
-				fb_users.push(doc.id)
+				fb_users.push(doc.id);
 			})
-		}).then(()=>{
-		
+		}).then(()=>{		
 			fb_users.forEach((user)=>{
 				firestore.collection("USERS").doc(user).collection("locations").orderBy("createdAt", "asc").limit(1)
 				.get()
 				.then((data)=>{
 					data.forEach((doc)=>{
-						// console.log(doc.data())
 						user_locs.push(doc.data());
 					})
 				}).then(()=>{
@@ -50,28 +48,26 @@ class TopNav extends Component {
 								longitude: user_locs[i].longitude,
 								latitude: user_locs[i].latitude,
 								createdAt: user_locs[i].createdAt
-							};
-					
+							};				
 							user_data.push(data);
 						}
 					}
-					console.log(user_data);
 					store.dispatch({ type:'UPDATE_LOC', users:user_data})
 				})
 			})
 		})
 	}
+
 	render() {
-		console.log(_users);
 		return (
 			<div>
 				<p />
 				<Row>
 					<Cell size="10px"></Cell>
-					<Cell size="10%">
-						<Link to="/"><IconButton >home</IconButton></Link>
+					<Cell size="20%">
+						<Link to="/"><IconButton size="small">home</IconButton></Link>
 						<Link to="/setting"><IconButton >gear</IconButton></Link>
-						<Link to="/inputname"><IconButton >plus</IconButton></Link>
+						<Link to="/adduserinfo"><IconButton >plus</IconButton></Link>
 					</Cell>
 					<Cell>
 						<UserButtonList/>

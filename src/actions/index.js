@@ -36,3 +36,9 @@ export const _load_userlist =() => {
         type: types._LOAD_USERLIST
     }
 }
+
+export const _load_loc =() => {
+    return{
+        type: types._LOAD_LOC
+    }
+}

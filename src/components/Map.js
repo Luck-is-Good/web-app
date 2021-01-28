@@ -46,7 +46,7 @@ class Map extends Component {
 
 		this.timerID = setInterval(
 			() => this.updateLocation(this.state.count),
-			5000
+			1000000
 		);
 
 
@@ -87,7 +87,7 @@ class Map extends Component {
 							user_data.push(data);
 						}
 					}
-					console.log(user_data);
+					//console.log(user_data);
 					store.dispatch({ type:'UPDATE_LOC', users:user_data})
 				})
 			})
