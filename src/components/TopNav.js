@@ -18,8 +18,11 @@ class TopNav extends Component {
 				<p />
 				<Row>
 					<Cell size="10px"></Cell>
-					<Cell size="10%">
-						<Link to="/"><IconButton>home</IconButton></Link>
+					<Cell size="15%">
+						<Link to="/"><IconButton onClick={function(){
+							console.log("set home function in")
+							{ store.dispatch({type:'SET_HOME', lat: 35.887653204936996, lng: 128.612698669104})};
+						}}>home</IconButton></Link>
 						<Link to="/setting"><IconButton >gear</IconButton></Link>
 						<Link to="/adduserinfo"><IconButton >plus</IconButton></Link>
 					</Cell>

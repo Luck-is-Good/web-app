@@ -6,3 +6,4 @@ export const _USER_SELECT = 'USER_SELECT';
 export const _LOAD_USERLIST = 'LOAD_USERLIST';
 export const _LOAD_LOC = 'LOAD_LOC';
 export const _USER_DELETE = 'USER_DELETE';
+export const _SET_HOME = 'SET_HOME';

@@ -48,3 +48,9 @@ export const _user_delete =() => {
         type: types._USER_DELETE
     }
 }
+
+export const _set_home =() => {
+    return{
+        type: types._SET_HOME
+    }
+}
