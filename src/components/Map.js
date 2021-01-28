@@ -27,12 +27,18 @@ class Map extends Component {
 		this.state = {
 			selected: 0,
 			Homecenter: { lat: 35.887653204936996, lng: 128.612698669104},
-			Users: []
+			Users: [],
+			lat: store.getState().lat,
+			lng: store.getState().lng,
+			selectedname: store.getState().selectedname
 		}
 
 		store.subscribe(function(){
-			this.setState({Users:store.getState().users});
+			this.setState({Users:store.getState().users})
 			this.setState({selected:store.getState().centerid})
+			this.setState({lat:store.getState().lat})
+			this.setState({lng:store.getState().lng})
+			this.setState({selectedname:store.getState().selectedname})
 		}.bind(this));
 	}
 
@@ -44,30 +50,19 @@ class Map extends Component {
 		let user_data = []
 		let user_locs = []
 
-		this.timerID = setInterval(this.updateLocation(),5000);
-
-		firestore
-			.collection("USERS" + "/test1" + "/locations")
-			.orderBy("createdAt", "asc")
-			.get()
-			.then((docs) => {
-				docs.forEach((doc) => {
-					locations.push({ lat: doc.data().latitude, lng: doc.data().longitude });
-				});
-			});
+		this.timerID = setInterval(this.updateLocation,5000);
 
 		firestore.collection("USERS").where("device_id", "!=", false).get().then((snapshot)=>{
 			snapshot.forEach((doc)=>{
 				fb_users.push(doc.id)
 			})
+			console.log("first component Did Amount")
 		}).then(()=>{
-		
 			fb_users.forEach((user)=>{
 				firestore.collection("USERS").doc(user).collection("locations").orderBy("createdAt", "desc").limit(1)
 				.get()
 				.then((data)=>{
 					data.forEach((doc)=>{
-						// console.log(doc.data())
 						user_locs.push(doc.data());
 					})
 				}).then(()=>{
@@ -83,44 +78,30 @@ class Map extends Component {
 							user_data.push(data);
 						}
 					}
-					//console.log(user_data);
-					store.dispatch({ type:'UPDATE_LOC', users:user_data})
+					if(user_data.length >= 1){
+						store.dispatch({ type:'UPDATE_USER_LIST', users:user_data})
+					}
 				})
 			})
 		})
-	}
-
-	// componentDidUpdate(){
-	// 	var users = store.getState().data.users;
-	// 	const user = users.find(whereid);
-	// 	lat = user.latitude;
-	// 	lng = user.longitude;
-	// 	this.setState({center:{lat, lng}});
-	// }
-
-	// 컴포넌트 언마운트 될 때 타이머 소멸
-	componentWillUnmount() {
-		clearInterval(this.timerID);
 	}
 
 	// time interval마다 실행될 함수
-	updateLocation(i) {
+	updateLocation() {
 		let fb_users = []
 		let user_data = []
 		let user_locs = []
-
 		firestore.collection("USERS").where("device_id", "!=", false).get().then((snapshot)=>{
 			snapshot.forEach((doc)=>{
 				fb_users.push(doc.id)
 			})
 		}).then(()=>{
-		
+			console.log("first update location")
 			fb_users.forEach((user)=>{
 				firestore.collection("USERS").doc(user).collection("locations").orderBy("createdAt", "desc").limit(1)
 				.get()
 				.then((data)=>{
 					data.forEach((doc)=>{
-						// console.log(doc.data())
 						user_locs.push(doc.data());
 					})
 				}).then(()=>{
@@ -132,21 +113,20 @@ class Map extends Component {
 								latitude: user_locs[i].latitude,
 								createdAt: user_locs[i].createdAt
 							};
-					
 							user_data.push(data);
 						}
 					}
-					console.log(user_data);
-					store.dispatch({ type:'UPDATE_LOC', users:user_data})
+					if(user_data.length >= 1){
+						store.dispatch({ type:'UPDATE_LOC', users:user_data})
+					}
 				})
 			})
 		})
 		
-		this.setState({
-			Homecenter: {lng:store.getState().users[this.state.selected].longitude, lat:store.getState().users[this.state.selected].latitude}
-		})
-	
-		//console.log("current location: ", locations[i].lat, locations[i].lng);
+		// this.state.setState({
+		// 	Homecenter: {lng:this.state.Users[this.state.selected].longitude, lat:this.state.Users[this.state.selected].latitude}
+		// })
+		// alert("hi this is keep loaded")
 	}
 
 	render() {
@@ -156,12 +136,12 @@ class Map extends Component {
 			>
 				<GoogleMap
 					mapContainerStyle={containerStyle}
-					center={this.state.Homecenter}
+					center={{lat: this.state.lat, lng: this.state.lng}}
 					zoom={18}
 				>
 					{this.state.Users.map(user =>
 						<Marker
-						position={{ lat: user.latitude, lng: user.longitude}}
+						position={{lat: user.latitude, lng: user.longitude}}
 						icon={icons.user}/>
 					)}
 

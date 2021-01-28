@@ -6,46 +6,34 @@ import BodyText from '@enact/moonstone/BodyText';
 import Heading from '@enact/moonstone/Heading';
 import Delete from './Delete';
 import store from '../store/store';
+import { firestore } from '../db/firebase';
 
 class SideNav extends React.Component {
-      
       constructor(props) {
             super(props);
             this.state = {
-			name: store.getState().name,
-			id: store.getState().id,
+			name: store.getState().users[store.getState().centerid].name,
+			id: store.getState().centerid,
 		}
 		store.subscribe(function(){
-			this.setState({name:store.getState().name});
-			this.setState({id:store.getState().id});
+			this.setState({name:store.getState().users[store.getState().centerid].name});
+			this.setState({id:store.getState().centerid});
 		}.bind(this));
-	}
+      }
+      // componentDidMount() {
+	// 	this.setState({name:store.getState().users[store.getState().centerid].name});
+      //       this.setState({id:store.getState().centerid});
+	// }
       
       render() {
             return (
                   <Panel >
                         <Heading>USER INFO</Heading>
                         <BodyText>Name : {this.state.name}</BodyText>
-                        <Delete name={this.state.name} id={this.state.name}/>
+                        <Delete name={this.state.name}/>
                   </Panel>
             )
       }
 };
-
-// function loadInfo() {
-//       let userName;
-
-//       firestore
-//       .collection('USERS')
-//       .doc('test1')
-//       .get()
-//       .then(doc => {
-//             if(doc.data()){
-//                   userName = doc.data().user_id;
-//             }
-//       });
-
-//       return userName;
-// }
 
 export default SideNav;

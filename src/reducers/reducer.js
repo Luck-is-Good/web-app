@@ -19,8 +19,8 @@ function reducer (state = Reducer_setting, action){
                 users: action.users
             }
         case types._UPDATE_USER_LIST:
-            return {
-
+            return {...state,
+                users: action.users 
             }
         case types._INIT_STORE:
             return {...state,
@@ -28,7 +28,9 @@ function reducer (state = Reducer_setting, action){
             }
         case types._USER_SELECT:
             return {...state,
-                centerid: action.centerid, name:action.name, id:action.id
+                centerid: action.centerid,
+                lat: action.lat,
+                lng: action.lng,
             }
         case types._LOAD_USERLIST:
             return {...state,
@@ -39,7 +41,7 @@ function reducer (state = Reducer_setting, action){
             current: action.current
         }
         case types._USER_DELETE:
-                return {}
+            return {}
         
         default: return state; //action을 이용하지 않을때 기본 this.props.setting을 사용할 때 사용
     }
