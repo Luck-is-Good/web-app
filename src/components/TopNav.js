@@ -7,11 +7,11 @@ import UserButtonList from './UserButtonList';
 import { firestore } from '../db/firebase';
 import store from '../store/store';
 import { Row, Cell } from '@enact/ui/Layout';
+import map from './Map';
 
 var _users = [];
 
 class TopNav extends Component {
-
 	// componentDidMount() {
 	// 	firestore
 	// 		.collection("USERS").limit(3)
@@ -64,8 +64,10 @@ class TopNav extends Component {
 				<p />
 				<Row>
 					<Cell size="10px"></Cell>
-					<Cell size="20%">
-						<Link to="/"><IconButton size="small">home</IconButton></Link>
+					<Cell size="10%">
+						<Link to="/"><IconButton onClick={
+                function(){ store.dispatch({type:'USER_SELECT', lat: 35.887653204936996, lng: 128.612698669104});
+              }} >home</IconButton></Link>
 						<Link to="/setting"><IconButton >gear</IconButton></Link>
 						<Link to="/adduserinfo"><IconButton >plus</IconButton></Link>
 					</Cell>

@@ -41,4 +41,10 @@ export const _load_loc =() => {
     return{
         type: types._LOAD_LOC
     }
+}    
+
+export const _user_delete =() => {
+    return{
+        type: types._USER_DELETE
+    }
 }

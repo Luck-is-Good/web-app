@@ -24,8 +24,7 @@ class UserButtonList extends Component {
       <div>
         {this.state.users.map(user =>
           <UserButton
-          key={user.id}
-          id={user.id}
+          id={user.indexof}
           name={user.name}/>
         )}
       </div>

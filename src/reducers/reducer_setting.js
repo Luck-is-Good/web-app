@@ -1,3 +1,4 @@
+/* eslint-disable */
 export default {
     users: [
         {name:'John', id:'1', longitude:128.5253009, latitude: 35.8219145},
@@ -8,9 +9,13 @@ export default {
         bgColor: "black",
         fontSize: "regular"
     },
-    centerid : '0',
     current : {
         lat: 0,
         lng: 0
-    }
+    },
+
+    centerid:0,
+    
+    lat: 35.8245, 
+    lng: 128.5009
 }
