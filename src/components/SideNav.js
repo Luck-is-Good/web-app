@@ -9,7 +9,6 @@ import store from '../store/store';
 import { firestore } from '../db/firebase';
 
 class SideNav extends React.Component {
-      
       constructor(props) {
             super(props);
             this.state = {
@@ -30,7 +29,6 @@ class SideNav extends React.Component {
             return (
                   <Panel >
                         <Heading>USER INFO</Heading>
-
                         <BodyText>Name : {this.state.name}</BodyText>
                         <Delete name={this.state.name}/>
                   </Panel>

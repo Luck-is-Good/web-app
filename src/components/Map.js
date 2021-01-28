@@ -52,16 +52,6 @@ class Map extends Component {
 
 		this.timerID = setInterval(this.updateLocation,5000);
 
-		// firestore
-		// 	.collection("USERS" + "/test1" + "/locations")
-		// 	.orderBy("createdAt", "asc")
-		// 	.get()
-		// 	.then((docs) => {
-		// 		docs.forEach((doc) => {
-		// 			locations.push({ lat: doc.data().latitude, lng: doc.data().longitude });
-		// 		});
-		// 	});
-
 		firestore.collection("USERS").where("device_id", "!=", false).get().then((snapshot)=>{
 			snapshot.forEach((doc)=>{
 				fb_users.push(doc.id)
@@ -72,11 +62,8 @@ class Map extends Component {
 				firestore.collection("USERS").doc(user).collection("locations").orderBy("createdAt", "desc").limit(1)
 				.get()
 				.then((data)=>{
-					let num = 0;
 					data.forEach((doc)=>{
 						user_locs.push(doc.data());
-						num++;
-						console.log("data foreach "+num);
 					})
 				}).then(()=>{
 					if(user_locs.length == fb_users.length){

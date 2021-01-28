@@ -6,12 +6,11 @@ import store from '../store/store';
 
 class UserButton extends Component {
     render() {
-        const {name, id, lat, lng, onClick} = this.props;
+        const {name, id, lat, lng, user, onClick} = this.props;
         return (
             <Button id={id} onClick={
                 function(){ store.dispatch({type:'USER_SELECT', centerid: id, lat: lat, lng: lng, selectedname: name});
               }}>{name}</Button>
-
         );
     }
 }

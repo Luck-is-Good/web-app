@@ -31,12 +31,14 @@ function reducer (state = Reducer_setting, action){
                 centerid: action.centerid,
                 lat: action.lat,
                 lng: action.lng,
-                selectedname: action.name
             }
         case types._LOAD_USERLIST:
             return {...state,
                 users: action.users
             }
+        case types._USER_DELETE:
+            return {}
+        
         default: return state; //action을 이용하지 않을때 기본 this.props.setting을 사용할 때 사용
     }
 } 
