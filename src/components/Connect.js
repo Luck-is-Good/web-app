@@ -34,7 +34,7 @@ class Connect extends React.Component {
 				console.log(this.props.name);
 			}
 			else{
-				firestore.collection("USERS").doc("inu")
+				firestore.collection("USERS").doc(this.props.name)
 				.collection("locations")
 				.orderBy("createdAt", "desc").limit(1)
 				.get()
